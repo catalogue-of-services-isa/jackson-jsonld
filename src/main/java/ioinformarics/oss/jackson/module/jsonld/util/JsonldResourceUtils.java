@@ -2,6 +2,7 @@ package ioinformarics.oss.jackson.module.jsonld.util;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ioinformarics.oss.jackson.module.jsonld.JsonldContextFactory;
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldRemoteContext;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldTypeFromJavaClass;
 import ioinformarics.oss.jackson.module.jsonld.internal.AnnotationConstants;
@@ -23,6 +24,12 @@ public abstract class JsonldResourceUtils {
         return typeFromAnnotation.isPresent() ? typeFromAnnotation : typeFromJavaClass(objType);
     }
 
+    public static Optional<String> getRemoteContext(Class<?> objType){
+        Optional<String> ContextFromAnnotation = Optional.ofNullable(objType.getAnnotation(JsonldRemoteContext.class))
+                    .map(JsonldRemoteContext::value);
+        return ContextFromAnnotation;
+    }
+    
     private static Optional<String> typeFromJavaClass(Class<?> objType) {
         return Optional.ofNullable(objType.getAnnotation(JsonldTypeFromJavaClass.class))
                 .map((t) -> {

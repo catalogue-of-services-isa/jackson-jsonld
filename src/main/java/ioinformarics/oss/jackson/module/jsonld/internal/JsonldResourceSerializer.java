@@ -28,6 +28,10 @@ public class JsonldResourceSerializer extends BeanSerializer {
         if(type.isPresent()) {
             jgen.writeStringField("@type", type.get());
         }
+        Optional<String> remoteContext = JsonldResourceUtils.getRemoteContext(bean.getClass());
+        if(remoteContext.isPresent()) {
+            jgen.writeStringField("@context", remoteContext.get());
+        }
         Optional<ObjectNode> context = JsonldResourceUtils.getContext(bean);
         if(context.isPresent()) {
             jgen.writeObjectField("@context", context.get());
