@@ -1,6 +1,10 @@
 # jackson-jsonld [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://www.opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/io-informatics/jackson-jsonld.svg)](https://travis-ci.org/io-informatics/jackson-jsonld) [![Join the chat at https://gitter.im/io-informatics/jackson-jsonld](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/io-informatics/jackson-jsonld?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 JSON-LD Module for Jackson
+## Add it in your repository
+Lauch Maven with the following goals:
+
+clean package install::install-file -Dfile=./target/jackson-jsonld-0.1.3-SNAPSHOT.jar -DgroupId=com.io-informatics.oss -DartifactId=jackson-jsonld -Dversion=0.1.3-SNAPSHOT -Dpackaging=jar
 
 ## Install it
 If you use maven, just add the dependency to your pom.xml
@@ -8,7 +12,7 @@ If you use maven, just add the dependency to your pom.xml
 <dependency>
     <groupId>com.io-informatics.oss</groupId>
     <artifactId>jackson-jsonld</artifactId>
-    <version>0.0.5</version>
+    <version>0.1.3</version>
 </dependency>
 ```
 
@@ -24,6 +28,7 @@ If you want to provide a default JSON-LD context for your application check the 
 Next, we can have annotated java beans which can be serialized using Jsonld. For instance:
 
 ```java
+    @JsonldRemoteContext(value="https://url/file.jsonld")
     @JsonldType("http://schema.org/Person")
     public class Person {
         @JsonldId
